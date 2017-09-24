@@ -17,6 +17,7 @@ namespace SchoolIn.API.Controllers
         public UserController(SchoolInContext context)
         {
             _context = context;
+
 		}
 
         [HttpGet]
