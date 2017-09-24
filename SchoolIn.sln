@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolIn.API", "SchoolIn.AP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolIn.Web", "SchoolIn.Web\SchoolIn.Web.csproj", "{8CD2D34B-3DC7-465A-B5AE-F082DF34652E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolIn.Test", "SchoolIn.Test\SchoolIn.Test.csproj", "{B1B61F30-5C59-4E23-8B35-5A5FE1306A4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{8CD2D34B-3DC7-465A-B5AE-F082DF34652E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CD2D34B-3DC7-465A-B5AE-F082DF34652E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CD2D34B-3DC7-465A-B5AE-F082DF34652E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B61F30-5C59-4E23-8B35-5A5FE1306A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B61F30-5C59-4E23-8B35-5A5FE1306A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B61F30-5C59-4E23-8B35-5A5FE1306A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B61F30-5C59-4E23-8B35-5A5FE1306A4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
