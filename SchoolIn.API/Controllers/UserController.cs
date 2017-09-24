@@ -26,7 +26,20 @@ namespace SchoolIn.API.Controllers
             return _context.Users.ToList();
         }
 
-        [HttpGet("{id}", Name = "GetUser")]
+		[HttpGet("username/{Username}", Name = "GetUserByUsername")]
+		public IActionResult GetByID(string username)
+		{
+			var item = _context.Users.FirstOrDefault(x => x.Username.Equals(username));
+			if (item == null)
+			{
+				return NotFound();
+			}
+
+			return new ObjectResult(item);
+		}
+
+
+		[HttpGet("{id}", Name = "GetUser")]
         public IActionResult GetByID(int id)
         {
             var item = _context.Users.FirstOrDefault(x => x.ID == id);
@@ -37,6 +50,7 @@ namespace SchoolIn.API.Controllers
 
             return new ObjectResult(item);
         }
+
 
         [HttpPost]
         public IActionResult Create([FromBody] User user)
