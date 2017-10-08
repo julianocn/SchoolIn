@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SchoolIn.API.EF;
+using SchoolIn.API.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,8 +25,10 @@ namespace SchoolIn.API.Controllers
         public IEnumerable<User> GetAll()
         {
             return _context.Users.ToList();
+
         }
 
+		/*
 		[HttpGet("username/{Username}", Name = "GetUserByUsername")]
 		public IActionResult GetByID(string username)
 		{
@@ -37,38 +40,58 @@ namespace SchoolIn.API.Controllers
 
 			return new ObjectResult(item);
 		}
+*/
 
-
-		[HttpGet("{id}", Name = "GetUser")]
-        public IActionResult GetByID(int id)
+        [HttpGet("{id:int}")]
+        public IActionResult Get(int id)
         {
-            var item = _context.Users.FirstOrDefault(x => x.ID == id);
+            var item = _context.Users.FirstOrDefault(x => x.UserID == id);
             if (item == null)
             {
                 return NotFound();
             }
 
-            return new ObjectResult(item);
+            return Ok(item);
         }
+
+        [HttpGet("{username}")]
+		public IActionResult Get(string username)
+		{
+            var item = _context.Users.FirstOrDefault(x => x.Username == username);
+			if (item == null)
+			{
+				return NotFound();
+			}
+
+			return Ok(item);
+		}
 
 
         [HttpPost]
-        public IActionResult Create([FromBody] User user)
+        public IActionResult Create([FromBody] UserItem user)
         {
-            if (user == null) return BadRequest();
+            if (user == null || !ModelState.IsValid) return BadRequest();
 
-            _context.Users.Add(user);
+            var item = new User()
+            {
+                UserID = user.ID,
+                Username = user.Username,
+                Password = user.Password,
+                Email = user.Email,
+            };
+
+            _context.Users.Add(item);
             _context.SaveChanges();
 
-            return CreatedAtRoute("GetUser", new { id = user.ID }, user);
+            return CreatedAtRoute("GetUser", new { id = user.ID }, item);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update (int id, [FromBody] User user)
+        public IActionResult Update (int id, [FromBody]User user)
         {
-            if (user == null || user.ID != id) return BadRequest();
+            if (user == null || user.UserID != id) return BadRequest();
 
-            var item = _context.Users.FirstOrDefault(x => x.ID == id);
+            var item = _context.Users.FirstOrDefault(x => x.UserID == id);
             if (item == null) return NotFound();
 
             item.Username = user.Username;
@@ -84,7 +107,7 @@ namespace SchoolIn.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete (int id)
         {
-            var item = _context.Users.FirstOrDefault(x => x.ID == id);
+            var item = _context.Users.FirstOrDefault(x => x.UserID == id);
             if (item == null) return NotFound();
 
             _context.Users.Remove(item);

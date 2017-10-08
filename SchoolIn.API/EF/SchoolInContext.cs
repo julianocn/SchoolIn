@@ -7,6 +7,7 @@ namespace SchoolIn.API.EF
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
 
         public SchoolInContext(DbContextOptions<SchoolInContext> options) : base(options)
         {
@@ -19,8 +20,9 @@ namespace SchoolIn.API.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasKey(x => x.ID);
-            modelBuilder.Entity<Post>().HasKey(x => x.ID);
+            modelBuilder.Entity<User>().HasKey(x => x.UserID);
+            modelBuilder.Entity<Post>().HasKey(x => x.PostID);
+            modelBuilder.Entity<User>().HasMany(x => x.Permissions);
             base.OnModelCreating(modelBuilder);
         }
     }

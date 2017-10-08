@@ -3,7 +3,7 @@ namespace SchoolIn.API.EF
 {
     public class Post
     {
-        public int ID { get; set; }
+        public int PostID { get; set; }
         public string Title { get; set; }
         public string PostType { get; set; }
 		public string Link { get; set; }

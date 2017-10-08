@@ -28,7 +28,7 @@ namespace SchoolIn.API.Controllers
         [HttpGet("{id}", Name = "GetPost")]
         public IActionResult GetById(int id)
         {
-            var item = _context.Posts.FirstOrDefault(x => x.ID == id);
+            var item = _context.Posts.FirstOrDefault(x => x.PostID == id);
             if (item == null) return NotFound();
             return new ObjectResult(item);
         }
@@ -40,15 +40,15 @@ namespace SchoolIn.API.Controllers
             _context.Posts.Add(post);
             _context.SaveChanges();
 
-            return CreatedAtRoute("GetPost", new { id = post.ID }, post);
+            return CreatedAtRoute("GetPost", new { id = post.PostID }, post);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] Post post)
         {
-            if (post == null || post.ID != id) return BadRequest();
+            if (post == null || post.PostID != id) return BadRequest();
 
-            var item = _context.Posts.FirstOrDefault(x => x.ID == id);
+            var item = _context.Posts.FirstOrDefault(x => x.PostID == id);
             if (item == null) return NotFound();
 
             item.Title = post.Title;
@@ -69,7 +69,7 @@ namespace SchoolIn.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete (int id)
         {
-            var item = _context.Posts.FirstOrDefault(x => x.ID == id);
+            var item = _context.Posts.FirstOrDefault(x => x.PostID == id);
             if (item == null) return NotFound();
 
             _context.Remove(item);

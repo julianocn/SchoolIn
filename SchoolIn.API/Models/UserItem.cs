@@ -9,10 +9,11 @@ namespace SchoolIn.API.Models
         public int ID { get; set; }
 
         [Display(Name = "Usuário")]
+        [Required]
         public string Username { get; set; }
 
         [Display(Name = "E-mail")]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Display(Name = "Senha")]
